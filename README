@@ -2,8 +2,6 @@
 
 Drywall is a base application for aggregating and categorizing content from multiple web sources. It uses MongoDB (and MongoMapper) as the backend data store.
 
-All the required gems can be found in vendor/cache.
-
 == TODO
 
 Create semantic_extraction gem for handling the categorization
