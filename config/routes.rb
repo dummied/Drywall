@@ -1,4 +1,12 @@
 Drywall::Application.routes.draw do |map|
+  resources :lists
+
+  resources :categories
+
+  resources :sources
+
+  resources :things
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
