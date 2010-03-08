@@ -9,7 +9,7 @@ class List
   
   many :things, :in => :thing_ids
   
-  def contain(thing)
+  def contain?(thing)
     if live_things.include?(thing)
       return true
     else

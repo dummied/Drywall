@@ -18,10 +18,11 @@ gem "mongo_mapper"
 # gem "hpricot", "0.6"
 # gem "sqlite3-ruby", :require => "sqlite3"
 # gem "aws-s3", :require => "aws/s3"
-gem "hpricot"
+gem "nokogiri"
 gem "sunspot"
 gem "sunspot_rails", :require => "sunspot/rails"
 gem "ruby_tubesday"
+gem "sanitize"
 
 ## Bundle gems used only in certain environments:
 # gem "rspec", :group => :test

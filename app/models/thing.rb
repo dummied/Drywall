@@ -1,6 +1,5 @@
 class Thing
   include MongoMapper::Document
-  include MongoMapper::Plugins::Callbacks
   include Sunspot::Rails::Searchable
   
   RELEVANCE_THRESHOLD = 2.0
@@ -17,6 +16,7 @@ class Thing
   belongs_to :source
   many :categories
   
+  before_validation_on_create :extract
   before_create :sourcify, :hijack_update, :tag_this, :categorize
   after_save :listify
   
@@ -27,22 +27,6 @@ class Thing
       p.tags.join(",")
     end
       
-  end
-  
-  def cleaned_extended
-    data = Hpricot(extended_body)
-    containers = (data/"div div")
-    if containers.blank?
-      taggable = extended_body
-    else
-      possibles = []
-      containers.each_with_index do |c, index|
-        possibles << {:index => index, :count => (c/"p").length}
-      end
-      taggable_index = possibles.max{|a,b| a[:count] <=> b[:count]}[:index]
-      taggable = containers[taggable_index]
-    end
-    return taggable
   end
   
   def tag_this
@@ -69,6 +53,47 @@ class Thing
       source = Source.new(:slug => root, :name => root.capitalize)
     end
     self.source = source
+  end
+  
+  # Attempts to extract the extended_body, body and title from an arbitrary URL. By necessity, extended_body is very rough right now.
+  # However, in limited testing, so far it is nailing the primary content div.
+  def extract
+    if extended_body.blank? || body.blank? || title.blank?
+      http = RubyTubesday.new
+      raw = http.get(link)
+      data = Nokogiri::HTML(raw)
+      no_body = false
+    end
+    if extended_body.blank?
+      containers = (data/"div div")
+      if containers.blank?
+        text = raw
+        no_body = true
+      else
+        possibles = []
+        containers.each_with_index do |c, index|
+          possibles << {:index => index, :count => ((c/"p").length - (c/"div").sum{|u| (u/"p").length})}
+        end
+        text_index = possibles.max{|a,b| a[:count] <=> b[:count]}[:index]
+        text = containers[text_index]
+        no_body = false
+      end
+      self.extended_body = Sanitize.clean(text.text)
+    end
+    if body.blank?
+      if meta_desc = data.css("meta[name='description']").first 
+        content = meta_desc['content']
+      elsif no_body
+        content = "No summary available"
+      else
+        content = Nokogiri::HTML(extended_body)
+        content = content.css("p").first.text
+      end
+      self.body = content
+    end
+    if title.blank?
+      self.title = data.css("title").first.children.first.to_s
+    end
   end
   
   def genius
