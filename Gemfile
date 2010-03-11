@@ -23,6 +23,7 @@ gem "sunspot"
 gem "sunspot_rails", :require => "sunspot/rails"
 gem "ruby_tubesday"
 gem "sanitize"
+gem "semantic_extraction"
 
 ## Bundle gems used only in certain environments:
 # gem "rspec", :group => :test

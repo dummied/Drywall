@@ -9,10 +9,6 @@ module MongoAdapter
     def load(id)
       @clazz.find(id)
     end
-    
-    def load_all(ids)
-      @clazz.find(ids)
-    end
   end
 end
 

@@ -30,7 +30,7 @@ class Thing
   end
   
   def tag_this
-    # TODO
+    self.tags = SemanticExtraction.find_keywords(extended_body)    
   end
   
   def categorize
