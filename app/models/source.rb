@@ -1,7 +1,7 @@
 class Source
   include MongoMapper::Document
   
-  key :feed_url, String
+  key :feed_urls, Array
   key :count, Integer
   key :home_url, String
   key :name, String
