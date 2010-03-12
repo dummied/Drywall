@@ -14,6 +14,7 @@ class Thing
   timestamps!
   
   belongs_to :source
+  one :user
   many :categories
   
   before_validation_on_create :extract
@@ -50,7 +51,7 @@ class Thing
   def sourcify
     root = link.match(/\w{3,5}:\/\/\w*\.(.+)\.\w{1,3}\/.*/)[1].gsub(".", "_")
     unless source = Source.find_by_slug(root)
-      source = Source.new(:slug => root, :name => root.capitalize)
+      source = Source.new(:slug => root, :name => root.capitalize, :home_url => link.match(/(\w{3,5}:\/\/.+\.\w{2,4})\/.*/)[0])
     end
     self.source = source
   end
@@ -97,22 +98,27 @@ class Thing
   end
   
   def genius
-    if tags.blank?
+    @things = related(100)
+    if @things.blank? || @things.hits.blank?
       @things = []
+    else
+      @things = @things.hits.reject{|u| u.score < RELEVANCE_THRESHOLD}.collect{|c| c.result}.sort_by{|y| y.created_at}
+    end
+    if @things.length < 2
+      @things = []
+    end
+    return @things
+  end
+  
+  def related(count=5)
+    if tags.blank?
+       @things = []
     else
       unless @things
         query = tags.collect{|u| "'" + u + "'"}.join(" ")
         @things = Thing.search do
           keywords query, :minimum_match => 1
-          paginate :per_page => 100
-        end
-        if @things.hits.blank?
-          @things = []
-        else
-          @things = @things.hits.reject{|u| u.score < RELEVANCE_THRESHOLD}.collect{|c| c.result}.sort_by{|y| y.created_at}
-        end
-        if @things.length < 2
-          @things = []
+          paginate :per_page => count
         end
       end
     end

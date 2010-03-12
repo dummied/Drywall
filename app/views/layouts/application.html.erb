@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>Drywall<%= " | #{@page_title}" unless (!defined?(@page_title) || @page_title.blank?) %></title>         
+
+    <%= stylesheet_link_tag '/stylesheets/blueprint/screen.css', :media => 'screen,projection' %> 
+    <%= stylesheet_link_tag '/stylesheets/blueprint/print.css', :media => 'print' %> 
+    <!--[if IE]>
+      <%= stylesheet_link_tag '/stylesheets/blueprint/ie.css', :media => 'screen,projection' %> 
+    <![endif]-->   
+    <%= stylesheet_link_tag 'screen', :media => 'screen,projection' %>
+
+    
+  </head>
+  <body>
+    <div class="container">
+    <div id="header span-24">
+      <h1><%= link_to "Drywall", "/" %></h1>
+    </div>
+    <%= yield %>         
+    </div>  
+    
+
+</body>
+</html>

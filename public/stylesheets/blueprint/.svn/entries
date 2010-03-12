@@ -1,0 +1,70 @@
+8
+
+dir
+47
+http://dummied.svn.beanstalkapp.com/followindy/trunk/public/stylesheets/blueprint
+http://dummied.svn.beanstalkapp.com/followindy
+
+
+
+2009-03-15T16:22:33.610866Z
+6
+dummied
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+a3d3521b-b9e7-4f8e-9ead-8a7240a9b3b6
+
+plugins
+dir
+
+print.css
+file
+
+
+
+
+2009-10-31T17:09:49.000000Z
+ab3584eb957750055a3201a5dd5f79c9
+2009-03-15T16:22:33.610866Z
+6
+dummied
+
+ie.css
+file
+
+
+
+
+2009-10-31T17:09:49.000000Z
+c026bf7db7e7d26ff19a96323ca7e646
+2009-03-15T16:22:33.610866Z
+6
+dummied
+
+screen.css
+file
+
+
+
+
+2009-10-31T17:09:49.000000Z
+e2f7ce82db886da8f91e983a4a15b782
+2009-03-15T16:22:33.610866Z
+6
+dummied
+
+src
+dir
+

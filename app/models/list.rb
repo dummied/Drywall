@@ -8,6 +8,7 @@ class List
   key :logic, Hash
   
   many :things, :in => :thing_ids
+  one :user
   
   def contain?(thing)
     if live_things.include?(thing)

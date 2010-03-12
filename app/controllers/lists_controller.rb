@@ -1,4 +1,6 @@
 class ListsController < ApplicationController
+  load_and_authorize_resource
+  
   # GET /lists
   # GET /lists.xml
   def index

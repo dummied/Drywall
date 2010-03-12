@@ -1,34 +1,14 @@
 class ThingsController < ApplicationController
+  load_and_authorize_resource
+  
   # GET /things
   # GET /things.xml
   def index
-    @things = Thing.all
+    @things = Thing.paginate(:page => params[:page] || 1, :per_page => 30, :order => "created_at DESC")
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @things }
-    end
-  end
-
-  # GET /things/1
-  # GET /things/1.xml
-  def show
-    @thing = Thing.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @thing }
-    end
-  end
-
-  # GET /things/new
-  # GET /things/new.xml
-  def new
-    @thing = Thing.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @thing }
     end
   end
 
@@ -69,15 +49,4 @@ class ThingsController < ApplicationController
     end
   end
 
-  # DELETE /things/1
-  # DELETE /things/1.xml
-  def destroy
-    @thing = Thing.find(params[:id])
-    @thing.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(things_url) }
-      format.xml  { head :ok }
-    end
-  end
 end

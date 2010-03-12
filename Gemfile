@@ -24,6 +24,10 @@ gem "sunspot_rails", :require => "sunspot/rails"
 gem "ruby_tubesday"
 gem "sanitize"
 gem "semantic_extraction"
+gem "will_paginate"
+gem "warden"
+gem "devise", "1.1.pre"
+gem "cancan"
 
 ## Bundle gems used only in certain environments:
 # gem "rspec", :group => :test

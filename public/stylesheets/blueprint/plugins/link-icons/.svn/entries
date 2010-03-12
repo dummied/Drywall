@@ -1,0 +1,55 @@
+8
+
+dir
+47
+http://dummied.svn.beanstalkapp.com/followindy/trunk/public/stylesheets/blueprint/plugins/link-icons
+http://dummied.svn.beanstalkapp.com/followindy
+
+
+
+2009-03-15T16:22:33.610866Z
+6
+dummied
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+a3d3521b-b9e7-4f8e-9ead-8a7240a9b3b6
+
+screen.css
+file
+
+
+
+
+2009-10-31T17:09:49.000000Z
+f34b30acb1badcba0753caa56c4a5e47
+2009-03-15T16:22:33.610866Z
+6
+dummied
+
+icons
+dir
+
+readme.txt
+file
+
+
+
+
+2009-10-31T17:09:49.000000Z
+1a0a475d4c2813d13cc4959b382239b4
+2009-03-15T16:22:33.610866Z
+6
+dummied
+

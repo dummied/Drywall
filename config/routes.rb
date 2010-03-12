@@ -1,11 +1,18 @@
 Drywall::Application.routes.draw do |map|
-  resources :lists
+  
+  devise_for :users
+  
+  root :to => "things#index"
 
-  resources :categories
+  resources :list
 
-  resources :sources
+  resources :category
 
-  resources :things
+  resources :source
+
+  resources :thing
+  
+  resources :tag
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
