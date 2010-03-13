@@ -9,7 +9,7 @@ class User
   key :role, String
   
   many :things
-  many :lists
+  many :lists, :dependent => :destroy
   
   def admin?
     role && role == "admin"
@@ -20,7 +20,11 @@ class User
   end  
   
   def rolify
-    if role.blank?
+    if (Setting.find_by_name("run_once").value == true) && User.count == 0
+      role = "admin"
+      Setting.find_by_name("run_once").update_attributes!(:value => false)
+      File.open("#{Rails.root}/config/startup_complete", 'w') {|f| f.write(Time.now.to_s) } 
+    elsif role.blank? || (current_user && !current_user.admin?)
       role = "author"
     end
   end

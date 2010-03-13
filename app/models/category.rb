@@ -5,4 +5,6 @@ class Category
   key :count, Integer
   key :description, String
   
+  many :things
+  many :sources
 end

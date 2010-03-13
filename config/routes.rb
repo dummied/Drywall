@@ -13,6 +13,8 @@ Drywall::Application.routes.draw do |map|
   resources :thing
   
   resources :tag
+  
+  resources :setting
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

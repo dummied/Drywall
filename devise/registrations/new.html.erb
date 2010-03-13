@@ -10,6 +10,10 @@
 
   <p><%= f.label :password_confirmation %></p>
   <p><%= f.password_field :password_confirmation %></p>
+  
+  <% if Setting.find_by_name("run_once").value == true %>
+    <%= f.hidden_field :role, :value => "admin" %>
+  <% end %>
 
   <p><%= f.submit "Sign up" %></p>
 <% end -%>

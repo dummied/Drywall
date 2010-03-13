@@ -1,0 +1,11 @@
+<% @settings.each do |s| %>
+  <% form_for :setting, s, :url => setting_path(s), :html => { :method => :put } do |f| -%>
+
+    <p><%= f.label s.name %></p>
+    <p><%= f.text_field :value %></p>
+
+    <p><%= f.submit "Update" %></p>
+  <% end -%>
+  
+  
+<% end %>

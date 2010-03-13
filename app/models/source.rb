@@ -12,4 +12,5 @@ class Source
   
   many :things
   many :categories
+  
 end

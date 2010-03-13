@@ -17,7 +17,8 @@
   <body>
     <div class="container">
     <div id="header span-24">
-      <h1><%= link_to "Drywall", "/" %></h1>
+      <h1><%= link_to "#{Setting.find_by_name("site_name").value}#{": " + @page_title if defined?(@page_title)}", root_url %></h1>
+      <%= ("<h2>" + Setting.find_by_name("site_description").value + "</h2>").html_safe unless Setting.find_by_name("site_description").value.blank? %>
     </div>
     <%= yield %>         
     </div>  
