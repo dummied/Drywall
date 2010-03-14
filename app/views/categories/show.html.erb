@@ -1,3 +1,9 @@
+<%= will_paginate(@things) %>
 
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+<%= render :partial => "things/thing", :collection => @things %>
+
+<%= will_paginate(@things) %>
+
+<div id="source_list">
+<%= render :partial => "sources/source", :collection => @sources %>
+</div>

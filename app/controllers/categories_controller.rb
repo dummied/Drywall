@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  
   # GET /categories
   # GET /categories.xml
   def index
@@ -13,10 +14,9 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.xml
   def show
-    @category = Category.find(params[:id])
-    @page_title = @category.name.capitalize
-    @things = @category.things.paginate(:page => params[:page] || 1, :per_page => 30)
-    render :template => "things/index"
+    @page_title = params[:id].capitalize
+    @things = Thing.paginate(:page => page, :per_page => Setting.articles_per_page, :order => "created_at DESC", 'categories.name' => params[:id])
+    @sources = Source.all('categories.name' => params[:id])
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @category }

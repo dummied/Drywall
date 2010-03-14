@@ -1,8 +1,10 @@
 class SourcesController < ApplicationController
+  load_and_authorize_resource
+  
   # GET /sources
   # GET /sources.xml
   def index
-    @sources = Source.all
+    @sources = Source.paginate(:page => page, :per_page => 10, :order => "created_at DESC")
 
     respond_to do |format|
       format.html # index.html.erb

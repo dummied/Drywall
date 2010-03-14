@@ -7,4 +7,8 @@ class Category
   
   many :things
   many :sources
+  
+  def to_param
+    name
+  end
 end

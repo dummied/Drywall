@@ -1,4 +1,5 @@
 class SettingsController < ApplicationController
+  load_and_authorize_resource
   
   def index
     @settings = Setting.all(:name.ne => "run_once", :order => "created_at DESC")

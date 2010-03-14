@@ -4,7 +4,7 @@ class ThingsController < ApplicationController
   # GET /things
   # GET /things.xml
   def index
-    @things = Thing.paginate(:page => params[:page] || 1, :per_page => 30, :order => "created_at DESC")
+    @things = Thing.paginate(:page => page, :per_page => Setting.articles_per_page, :order => "created_at DESC")
 
     respond_to do |format|
       format.html # index.html.erb

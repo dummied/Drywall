@@ -19,6 +19,10 @@ class User
     role && role == "author"
   end  
   
+  def to_param
+    login
+  end
+  
   def rolify
     if (Setting.find_by_name("run_once").value == true) && User.count == 0
       role = "admin"

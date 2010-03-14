@@ -10,7 +10,16 @@ class Source
   key :tags, Array
   timestamps!
   
-  many :things
+  many :things, :dependent => :destroy
   many :categories
+  
+  
+  def last_thing
+    things.first(:order => "created_at DESC")
+  end
+  
+  def to_param
+    slug
+  end
   
 end
