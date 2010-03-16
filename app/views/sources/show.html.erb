@@ -1,3 +1,7 @@
+<%= will_paginate(@things) %>
 
-<%= link_to 'Edit', edit_source_path(@source) %> |
-<%= link_to 'Back', sources_path %>
+<%= render :partial => "things/thing", :collection => @things %>
+
+<%= will_paginate(@things) %>
+
+<%= link_to 'Edit', edit_source_path(@source) if can?(:update, @source) %>

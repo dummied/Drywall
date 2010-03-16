@@ -1,0 +1,71 @@
+types: !omap
+  - text:
+      class: TextField
+      suffix: text
+      omit_norms: false
+      tokenizer: StandardTokenizerFactory
+      filters:
+        - StandardFilterFactory
+        - LowerCaseFilterFactory
+      invariants:
+        multiValued: true
+  - boolean:
+      class: BoolField
+      suffix: b
+  - date:
+      class: DateField
+      suffix: d
+  - rand:
+      class: RandomSortField
+  - sdouble:
+      class: SortableDoubleField
+      suffix: e
+  - sfloat:
+      class: SortableFloatField
+      suffix: f
+  - sint:
+      class: SortableIntField
+      suffix: i
+  - slong:
+      class: SortableLongField
+      suffix: l
+  - string:
+      class: StrField
+      suffix: s
+  - tint:
+      class: TrieIntField
+      suffix: it
+  - tfloat:
+      class: TrieFloatField
+      suffix: ft
+  - tdouble:
+      class: TrieDoubleField
+  - tdate:
+      class: TrieDateField
+      suffix: dt
+fixed: !omap
+  - id:
+      type: string
+      attributes: [stored]
+  - type:
+      type: string
+      attributes: [multiValued]
+  - class_name:
+      type: string
+  - text:
+      type: string
+      attributes: [multiValued]
+  - lat:
+      type: tdouble
+      attributes: [stored]
+  - lng:
+      type: tdouble
+      attributes: [stored]
+  - 'random_*':
+      type: rand
+  - '_local*':
+      type: tdouble
+    
+variants: !omap
+  - multiValued: m
+  - stored: s

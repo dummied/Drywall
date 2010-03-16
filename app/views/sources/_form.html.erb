@@ -1,7 +1,12 @@
-<% form_for(@source) do |f| %>
-  <%= f.error_messages %>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<% semantic_form_for(@source) do |f| %>
+  <% f.inputs :name => 'Source' do %>
+    <%= f.input :slug, :label => 'slug' %>
+    <%= f.input :name, :label => 'name' %>
+    <%= f.input :description, :label => 'Description' %>
+    <%= f.input :home_url, :label => 'Home URL' %>
+    <%= f.input :feed_urls, :label => 'Feed URLs' %>
+    <%= f.input :categories, :label => 'Categories' %>
+    <%= f.commit_button 'Submit' %>
+  <% end %>
+  
 <% end %>

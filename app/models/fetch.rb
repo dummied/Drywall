@@ -50,12 +50,14 @@ class Fetch
             :tags => []
           )
         else   
-           thing = Thing.create!(
+           thing = Thing.new(
              :title => (i/"title").first.inner_html,
              :body => body,
              :link => link,
              :created_at => time
            )
+           thing.source = Source.first(:feed_urls => feed_url)
+           thing.save!
          end
        rescue
          next

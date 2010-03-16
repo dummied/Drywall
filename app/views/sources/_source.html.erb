@@ -1,3 +1,3 @@
-<h6><%= link_to source.name, source.home_url %></h6>
+<h6><%= link_to source.name, source_url(source) %></h6>
 <p class="summary"><%= source.description %></p>
-<p class="meta"><%= source.things.count %> items :: <%= time_ago_in_words(source.last_thing.created_at) %> ago<% unless source.categories.blank? %> :: Categories: <%= source.categories.collect{|u| link_to u.name, category_url(u)}.to_sentence.html_safe %><% end %></p>
+<p class="meta"><%= link_to "Homepage", source.home_url %> :: <%= source.things.count %> items<% unless source.last_thing.blank? %> :: <%= time_ago_in_words(source.last_thing.created_at) %> ago<% end %><% unless source.categories.blank? %> :: Categories: <%= source.categories.collect{|u| link_to u.name, category_url(u)}.to_sentence.html_safe %><% end %></p>

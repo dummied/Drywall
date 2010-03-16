@@ -31,7 +31,7 @@ class Thing
   end
   
   def tag_this
-    self.tags = SemanticExtraction.find_keywords(extended_body)    
+    self.tags = SemanticExtraction.find_keywords(extended_body).collect{|t| t.gsub(".", " ")}    
   end
   
   def categorize
@@ -49,11 +49,13 @@ class Thing
   end
   
   def sourcify
-    root = link.match(/\w{3,5}:\/\/\w*\.(.+)\.\w{1,3}\/.*/)[1].gsub(".", "_")
-    unless source = Source.find_by_slug(root)
-      source = Source.new(:slug => root, :name => root.capitalize, :home_url => link.match(/(\w{3,5}:\/\/.+\.\w{2,4})\/.*/)[0])
+    if source.blank?
+      root = link.match(/\w{3,5}:\/\/\w*\.(.+)\.\w{1,3}\/.*/)[1].gsub(".", "_")
+      unless source = Source.find_by_slug(root)
+        source = Source.new(:slug => root, :name => root.capitalize, :home_url => link.match(/(\w{3,5}:\/\/.+\.\w{2,4})\/.*/)[0])
+      end
+      self.source = source
     end
-    self.source = source
   end
   
   # Attempts to extract the extended_body, body and title from an arbitrary URL. By necessity, extended_body is very rough right now.

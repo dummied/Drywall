@@ -4,7 +4,7 @@ class ListsController < ApplicationController
   # GET /lists
   # GET /lists.xml
   def index
-    @lists = List.all
+    @lists = List.paginate(:page => page, :per_page => 10, :order => "created_at DESC")
 
     respond_to do |format|
       format.html # index.html.erb

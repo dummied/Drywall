@@ -1,4 +1,5 @@
 class SourcesController < ApplicationController
+  before_filter :find_source, :only => [:show, :edit, :destroy]
   load_and_authorize_resource
   
   # GET /sources
@@ -15,8 +16,9 @@ class SourcesController < ApplicationController
   # GET /sources/1
   # GET /sources/1.xml
   def show
-    @source = Source.find(params[:id])
-
+    
+    @things = @source.things.paginate(:page => page, :per_page => Setting.articles_per_page, :order => "created_at DESC")
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @source }
@@ -42,6 +44,9 @@ class SourcesController < ApplicationController
   # POST /sources
   # POST /sources.xml
   def create
+    unless params[:source][:categories].blank?
+      params[:source][:categories] = params[:source][:categories].split(",").collect{|u| u.strip}.reject{|u| u.blank?}.uniq.collect{|p| Category.new(:name => p)}
+    end
     @source = Source.new(params[:source])
 
     respond_to do |format|
@@ -81,5 +86,11 @@ class SourcesController < ApplicationController
       format.html { redirect_to(sources_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  private
+  
+  def find_source
+    @source = Source.first(:slug => params[:id])
   end
 end

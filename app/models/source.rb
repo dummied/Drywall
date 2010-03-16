@@ -11,8 +11,7 @@ class Source
   timestamps!
   
   many :things, :dependent => :destroy
-  many :categories
-  
+  many :categories  
   
   def last_thing
     things.first(:order => "created_at DESC")

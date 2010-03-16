@@ -1,0 +1,8 @@
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/**/*
+.DS_Store
+config/initializers/semantic_extraction.rb
+config/startup_complete
+solr/
