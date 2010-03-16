@@ -43,7 +43,7 @@ class Fetch
         if thing = Thing.find_by_link(link)
           thing = Thing.update_attributes!(
             :title => (i/"title").first.inner_html,
-            :body => body,
+            :body => Sanitize.clean(body),
             :link => link,
             :created_at => time,
             :extended_body => nil,
@@ -56,7 +56,7 @@ class Fetch
              :link => link,
              :created_at => time
            )
-           thing.source = Source.first(:feed_urls => feed_url)
+           thing.source = source || Source.first(:feed_urls => feed_url)
            thing.save!
          end
        rescue

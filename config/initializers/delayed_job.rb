@@ -1,0 +1,1 @@
+Delayed::Worker.backend = :mongo

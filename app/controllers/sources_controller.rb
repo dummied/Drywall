@@ -47,11 +47,14 @@ class SourcesController < ApplicationController
     unless params[:source][:categories].blank?
       params[:source][:categories] = params[:source][:categories].split(",").collect{|u| u.strip}.reject{|u| u.blank?}.uniq.collect{|p| Category.new(:name => p)}
     end
+    unless params[:source][:feed_urls].blank?
+      params[:source][:feed_urls] = params[:source][:feed_urls].split(",").collect{|u| u.strip}.reject{|u| u.blank?}.uniq
+    end
     @source = Source.new(params[:source])
 
     respond_to do |format|
       if @source.save
-        format.html { redirect_to(@source, :notice => 'Source was successfully created.') }
+        format.html { redirect_to(@source, :notice => 'Source was successfully created. We\'ll be doing an initial fetch of articles shortly.') }
         format.xml  { render :xml => @source, :status => :created, :location => @source }
       else
         format.html { render :action => "new" }

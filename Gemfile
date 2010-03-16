@@ -30,6 +30,7 @@ gem "devise", "1.1.pre"
 gem "cancan"
 gem 'flash_messages_helper'
 gem "formtastic"
+gem "delayed_job", :git => "git://github.com/collectiveidea/delayed_job.git"
 
 ## Bundle gems used only in certain environments:
 # gem "rspec", :group => :test
